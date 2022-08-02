@@ -1,5 +1,7 @@
 #!/bin/bash
 
+pushd /home/simon/todo-list || exit
+
 while :
   do
     # Holds the terminal until action is chosen
