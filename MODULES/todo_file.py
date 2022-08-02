@@ -3,7 +3,7 @@ import MODULES.todo_entry as te
 
 
 def generate_todofile(filename, entry_list):
-	"""DOC!"""
+	"""Generate todo list file with header"""
 	with open(filename, "w") as f:
 		f.write("COMMENT\t DUE_Y\t DUE_M\t DUE_D\t REM\n")
 		
@@ -16,11 +16,16 @@ def generate_todofile(filename, entry_list):
 
 
 def read_todofile(filename: str):
-	"""DOC!"""
+	"""Read in all entries in todo list file"""
 	full_file = []
 	with open(filename, "r"):
 		raw_data = np.genfromtxt(filename, skip_header=1, delimiter="\t",
 		                         dtype=str)
+		
+		# If less than two entries in file, make sure routine below
+		# still works
+		if len(raw_data.shape) == 1:
+			raw_data = [raw_data]
 		
 		for entry in raw_data:
 			comment = entry[0]
@@ -35,7 +40,7 @@ def read_todofile(filename: str):
 
 
 def update_todofile(filename, old_entry_list, action_choice):
-	"""DOC"""
+	"""Update existing todo file entries"""
 	new_entry_list = old_entry_list
 	
 	if action_choice == "a":

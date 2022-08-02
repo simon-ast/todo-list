@@ -1,5 +1,3 @@
-import datetime as dt
-from MODULES import todo_entry as te
 from MODULES import todo_file as tf
 from MODULES import display
 
@@ -7,6 +5,7 @@ FILENAME = "ToDo_Entries.txt"
 
 
 def main():
+	"""Read list entries, print to screen, ask for input"""
 	event_list = tf.read_todofile(FILENAME)
 	display.print_todolist(event_list)
 	

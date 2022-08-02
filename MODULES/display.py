@@ -3,7 +3,7 @@ from termcolor import colored
 
 
 def print_todolist(event_list):
-	"""DOC"""
+	"""Call all print functions"""
 	print_header()
 	print_events(event_list)
 
@@ -29,7 +29,7 @@ def print_header():
 
 
 def print_events(event_list):
-	"""DOC"""
+	"""Iteratively print events from todo-list file"""
 	for entry in event_list:
 		time_remaining = entry.remaining_time()
 		print_color = set_color(int(time_remaining))
@@ -49,7 +49,7 @@ def print_events(event_list):
 
 
 def set_color(time_remaining):
-	"""DOC!"""
+	"""Colour code entry display by remaining time"""
 	text_color = "white"
 	
 	if time_remaining <= 14:

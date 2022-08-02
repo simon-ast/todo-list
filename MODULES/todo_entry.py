@@ -2,7 +2,7 @@ import datetime as dt
 
 
 class TodoEntry:
-	"""DOC"""
+	"""Parent class for individual todo entry"""
 	def __init__(self, description: str, due_date_list):
 		self.comment = description
 		self.due_raw = due_date_list
@@ -11,6 +11,7 @@ class TodoEntry:
 		                       day=due_date_list[2])
 	
 	def remaining_time(self):
+		"""Calculate remaining time from current date and due date"""
 		today = dt.datetime.today()
 		remaining = self.due - today
 		
@@ -18,7 +19,7 @@ class TodoEntry:
 
 
 def generate_entry():
-	"""DOC"""
+	"""Generate todo list entry with comment and due date"""
 	input_descr = input("PLEASE DESCRIBE TODO ENTRY [30 CHARS]: ")
 	if len(input_descr) > 30:
 		print(f"PLEASE STAY WITHIN 30 CHARS "
@@ -31,7 +32,7 @@ def generate_entry():
 
 
 def ask_for_date():
-	"""DOC"""
+	"""Ask for due date in correct format"""
 	input_duedate = input("PLEASE INPUT DUE DATE [YYYY/MM/DD]: ")
 	due_year, due_month, due_day = input_duedate.split("/")
 	
