@@ -15,7 +15,8 @@ class TodoEntry:
 		today = dt.datetime.today()
 		remaining = self.due - today
 		
-		return remaining.days
+		# By adding 1, if day = current then it will result in 0 (not -1)
+		return remaining.days + 1
 
 
 def generate_entry():
@@ -48,9 +49,9 @@ def ask_for_date():
 		print("\nDATE NOT RECOGNIZED!\n")
 		ask_for_date()
 	
-	# COMMENT
-	remaining = due_date - dt.datetime.today()
-	if int(remaining.days) <= 0:
+	# By adding 1, if day = current then it will result in 0 (not -1)
+	remaining = int((due_date - dt.datetime.today()).days) + 1
+	if int(remaining) < 0:
 		print("IM SORRY, THAT EVENT HAS PASSED.")
 		ask_for_date()
 	
