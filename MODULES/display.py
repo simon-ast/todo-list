@@ -30,12 +30,14 @@ def print_header():
 
 def print_events(event_list):
 	"""Iteratively print events from todo-list file"""
+	i = 1
+	
 	for entry in event_list:
 		time_remaining = entry.remaining_time()
 		print_color = set_color(int(time_remaining))
 		
 		event_str = colored(
-			f"\t\t"
+			f"\t {i}\t"
 			f"{entry.comment:30s}\t\t "
 			f"{entry.due.strftime('%a')}, "
 		    f"{entry.due.strftime('%d %b %Y')}\t "
@@ -44,6 +46,7 @@ def print_events(event_list):
 		)
 		
 		print(event_str)
+		i += 1
 	
 	print("\n\n")
 
