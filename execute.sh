@@ -1,6 +1,6 @@
 #!/bin/bash
 
-pushd /home/simon/todo-list || exit
+pushd /home/simon/Code/todo-list || exit
 
 while :
   do
