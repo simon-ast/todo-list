@@ -7,8 +7,8 @@ class TodoEntry:
 		self.comment = description
 		self.due_raw = due_date_list
 		self.due = dt.datetime(year=due_date_list[0],
-		                       month=due_date_list[1],
-		                       day=due_date_list[2])
+							   month=due_date_list[1],
+							   day=due_date_list[2])
 	
 	def remaining_time(self):
 		"""Calculate remaining time from current date and due date"""
@@ -24,7 +24,7 @@ def generate_entry():
 	input_descr = input("PLEASE DESCRIBE TODO ENTRY [30 CHARS]: ")
 	if len(input_descr) > 30:
 		print(f"PLEASE STAY WITHIN 30 CHARS "
-		      f"(YOU WROTE {len(input_descr)} CHARS)\n")
+			  f"(YOU WROTE {len(input_descr)} CHARS)\n")
 		generate_entry()
 	
 	input_duedate = ask_for_date()
@@ -34,8 +34,15 @@ def generate_entry():
 
 def ask_for_date():
 	"""Ask for due date in correct format"""
-	input_duedate = input("PLEASE INPUT DUE DATE [YYYY/MM/DD]: ")
-	due_year, due_month, due_day = input_duedate.split("/")
+	input_duedate = input(
+		"PLEASE INPUT DUE DATE [YYYY/MM/DD]:\n"
+		"(LEAVE EMPTY FOR GENERAL REMINDER) "
+	)
+
+	if input_duedate == "":
+		due_year, due_month, due_day = "01/01/9999".split("/")
+	else:
+		due_year, due_month, due_day = input_duedate.split("/")
 	
 	# Convert to int values
 	due_date_list = [int(due_year), int(due_month), int(due_day)]
@@ -43,8 +50,9 @@ def ask_for_date():
 	# Sanity check for due time
 	due_date = None
 	try:
-		due_date = dt.datetime(due_date_list[0], due_date_list[1],
-		                       due_date_list[2])
+		due_date = dt.datetime(
+			due_date_list[0], due_date_list[1], due_date_list[2]
+		)
 	except ValueError:
 		print("\nDATE NOT RECOGNIZED!\n")
 		ask_for_date()

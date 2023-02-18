@@ -9,7 +9,7 @@ def main():
 	event_list = tf.read_todofile(FILENAME)
 	display.print_todolist(event_list)
 	
-	answer = input("ADD (a) / REMOVE (r) / EXIT (q)? ")
+	answer = input("ADD (a) / REMOVE (r) / RELOAD (q)? ")
 	
 	if answer.lower() in ["a", "r"]:
 		tf.update_todofile(FILENAME, event_list, answer.lower())
