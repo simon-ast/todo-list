@@ -4,11 +4,14 @@ import datetime as dt
 class TodoEntry:
 	"""Parent class for individual todo entry"""
 	def __init__(self, description: str, due_date_list):
+		self.idx = 0
 		self.comment = description
 		self.due_raw = due_date_list
-		self.due = dt.datetime(year=due_date_list[0],
-							   month=due_date_list[1],
-							   day=due_date_list[2])
+		self.due = dt.datetime(
+			year=due_date_list[0],
+			month=due_date_list[1],
+			day=due_date_list[2]
+		)
 	
 	def remaining_time(self):
 		"""Calculate remaining time from current date and due date"""
@@ -18,13 +21,19 @@ class TodoEntry:
 		# By adding 1, if day = current then it will result in 0 (not -1)
 		return remaining.days + 1
 
+	def list_index(self, idx):
+		"""Index entries in the todo-list file"""
+		self.idx = idx
+
 
 def generate_entry():
 	"""Generate todo list entry with comment and due date"""
 	input_descr = input("PLEASE DESCRIBE TODO ENTRY [30 CHARS]: ")
 	if len(input_descr) > 30:
-		print(f"PLEASE STAY WITHIN 30 CHARS "
-			  f"(YOU WROTE {len(input_descr)} CHARS)\n")
+		print(
+			f"PLEASE STAY WITHIN 30 CHARS "
+			f"(YOU WROTE {len(input_descr)} CHARS)\n"
+		)
 		generate_entry()
 	
 	input_duedate = ask_for_date()
@@ -40,7 +49,7 @@ def ask_for_date():
 	)
 
 	if input_duedate == "":
-		due_year, due_month, due_day = "01/01/9999".split("/")
+		due_year, due_month, due_day = "9999/01/01".split("/")
 	else:
 		due_year, due_month, due_day = input_duedate.split("/")
 	

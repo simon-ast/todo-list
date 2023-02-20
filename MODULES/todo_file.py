@@ -8,19 +8,22 @@ def generate_todofile(filename, entry_list):
 		f.write("COMMENT\t DUE_Y\t DUE_M\t DUE_D\t REM\n")
 		
 		for event in entry_list:
-			f.write(f"{event.comment}\t "
-			        f"{event.due_raw[0]}\t "
-			        f"{event.due_raw[1]}\t "
-			        f"{event.due_raw[2]}\t "
-			        f"{event.remaining_time()}\n")
+			f.write(
+				f"{event.comment}\t "
+				f"{event.due_raw[0]}\t "
+				f"{event.due_raw[1]}\t "
+				f"{event.due_raw[2]}\t "
+				f"{event.remaining_time()}\n"
+			)
 
 
 def read_todofile(filename: str):
 	"""Read in all entries in todo list file"""
 	full_file = []
 	with open(filename, "r"):
-		raw_data = np.genfromtxt(filename, skip_header=1, delimiter="\t",
-		                         dtype=str)
+		raw_data = np.genfromtxt(
+			filename, skip_header=1, delimiter="\t", dtype=str
+		)
 		
 		# If less than two entries in file, make sure routine below
 		# still works
@@ -35,8 +38,21 @@ def read_todofile(filename: str):
 			full_file.append(todo_event)
 			
 			full_file.sort(key=lambda x: int(x.remaining_time()))
-	
-	return full_file
+
+		# Generate a unique index for each entry
+		for idx in range(len(full_file)):
+			full_file[idx].idx = idx + 1
+
+	# TODO: Make this a bit nicer
+	reminders = []
+	events = []
+	for entry in full_file:
+		if entry.due.year == int(9999):
+			reminders.append(entry)
+		else:
+			events.append(entry)
+
+	return reminders, events
 
 
 def update_todofile(filename, old_entry_list, action_choice):
