@@ -1,5 +1,5 @@
 # ToDo - List
-A very simple "application" that allows the generation of a ToDo / Reminder 
+Simplified that allows the generation of a ToDo / Reminder 
 list. The list can be interactively customised and displays the following
 information: 
 
