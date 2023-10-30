@@ -1,6 +1,6 @@
 #!/bin/bash
 
-pushd /home/simon/Code/git-repos/todo-list || exit
+pushd /home/simon/Code/git-dev/todo-list || exit
 
 while :
   do
